@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Employee System</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Add New Employee</h2>
+        <form action="/add" method="POST" class="add-form">
+            <input type="number" name="id" placeholder="Enter ID" required>
+            <input type="text" name="ename" placeholder="Enter Name" required>
+            <input type="number" name="salary" placeholder="Salary" required>
+            <button type="submit">Add Record</button>
+        </form>
+
+        <hr>
+
+        <!-- Search Bar -->
+<form action="/search" method="GET" style="margin-bottom: 20px;">
+    <input type="text" name="search_name" placeholder="Search by name...">
+    <button type="submit">Search</button>
+     <a href="/" id = S> Show All  </a>
+</form>
+
+<hr>
+
+<!-- Update Salary Form -->
+<h2>Update Salary</h2>
+<form action="/update" method="POST">
+    <input type="number" name="id" placeholder="Employee ID" required>
+    <input type="number" name="salary" placeholder="New Salary" required>
+    <button type="submit">Update Salary</button>
+</form>
+
+
+        <hr>
+
+        <h2>Employee List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.id }}</td>
+                    <td>{{ emp.ename }}</td>
+                    <td>₹{{ emp.salary }}</td>
+                    <td>
+                        <a href="/delete/{{ emp.id }}" class="btn-delete">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
